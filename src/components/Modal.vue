@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ greet }}<button @click="$emit('close')">x</button></h1>
+    <h1>{{ greet }}<button @click="$emit('close', 3)">x</button></h1>
     <slot></slot>
     <slot name="namedSlot"></slot>
   </div>
@@ -13,4 +13,5 @@ const props = defineProps({
     default: 'default value'
   }
 })
+const emit = defineEmits([])
 </script>

@@ -5,7 +5,7 @@
     <h3>Installed CLI Plugins</h3>
     <div v-if="showGreet">
     <teleport to=".modals">
-      <Modal @close="toggleGreet">
+      <Modal @close="toggleGreet" :greet='greet'>
         <p>this is it the slot</p>
         <template v-slot:namedSlot>this is in the named slot</template>
       </Modal>
@@ -21,16 +21,20 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
+import {ref, watch} from 'vue'
 import Modal from '@/components/Modal.vue'
 
 const msg = ref('ciao io sono il nuovo bellissimo messaggio, pronto ad essere inutilmente letto da te');
 const showGreet = ref(true);
-const num = ref(2);
 const greet = ref('Hello world')
-
 const multiplyBy2 = () => num.value = num.value * 2
-const toggleGreet = () => showGreet.value = !showGreet.value
+const num = ref(2);
+
+const toggleGreet = newValue => {
+  showGreet.value = !showGreet.value;
+  num.value = newValue
+}
+ watch(num, (newV, oldV) => console.log('the old value of num: ',oldV, 'the new value of num: ', newV))
   // import Modal from './Modal.vue';
 
   // export default {
